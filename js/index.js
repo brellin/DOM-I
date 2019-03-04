@@ -50,6 +50,11 @@ links[3].innerText = siteContent["nav"]["nav-item-4"];
 links[4].innerText = siteContent["nav"]["nav-item-5"];
 links[5].innerText = siteContent["nav"]["nav-item-6"];
 
+// Link Style
+links.forEach(curr => {
+  curr.style.transition = 'text-shadow .5s ease-out 0s';
+});
+
 // ====================="CTA"=======================
 // h1
 const ctaH1 = document.querySelectorAll("h1")[0];
@@ -113,3 +118,23 @@ email.innerText = siteContent["contact"]["email"];
 // ===================Footer===================
 const copyright = document.querySelectorAll("p")[8];
 copyright.innerText = siteContent["footer"]["copyright"];
+
+// ===================Styles Buttons=====================
+// Get CTA-Text & existing button
+const ctaText = document.querySelector('.cta-text');
+const styleButtonOn = document.querySelector('button');
+
+// Hover style set
+const head = document.querySelector('head');
+const hover = document.createElement('style');
+hover.innerText = 'a:hover{text-shadow: 1px 2px 2px;}';
+
+// On
+styleButtonOn.innerText = 'Click for Styles On';
+styleButtonOn.addEventListener('click', function () { head.append(hover) });
+
+// Off
+const styleButtonOff = document.createElement('button');
+styleButtonOff.innerText = 'Click for Styles Off';
+ctaText.appendChild(styleButtonOff);
+styleButtonOff.addEventListener('click', function () { head.removeChild(hover) });
