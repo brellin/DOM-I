@@ -9,20 +9,32 @@ buttons.classList.add('.digits');
 
 // Actual buttons
 const start = document.createElement('button'),
-    stop = document.createElement('button');
+    stop = document.createElement('button'),
+    reset = document.createElement('button');
+// Nest
 buttons.append(start);
 buttons.append(stop);
+buttons.append(reset);
+// Content
 start.innerText = 'Start';
 stop.innerText = 'Stop';
+reset.innerText = 'Reset';
 
 // ===============Timer===============
 // Set Start
 function startTimer() {
-    let arrival = new Date(),
-        timer = setInterval(showElapsed, 1);
+
+    // Set Stop
+    function stopTimer() {
+        clearInterval(timer);
+    }
+
+    // Define arrival and timer
+    let arrival = new Date().getTime(),
+        timer = setInterval(showElapsed, 10);
 
     function showElapsed() {
-        let rightNow = (new Date()).getTime(),
+        let rightNow = new Date().getTime(),
             distance = Math.floor((rightNow - arrival) / 10).toString().split(''),
             sTens = distance[3] == undefined ? 0 : distance[0];
         if (distance[1] == undefined) {
@@ -56,12 +68,18 @@ function startTimer() {
         msTens.innerText = mTens;
     }
 
-    // Set Stop
-    function stopTimer() {
-        clearInterval(timer);
-    }
-
     stop.addEventListener('click', stopTimer);
+
+    reset.addEventListener('click', resetTimer);
+
+    // Set Reset
+    function resetTimer() {
+        clearInterval(timer);
+        secondTens.innerText = '-';
+        secondOnes.innerText = '-';
+        msHundreds.innerText = '-';
+        msTens.innerText = '-';
+    }
 
 }
 
