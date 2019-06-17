@@ -129,12 +129,27 @@ const head = document.querySelector('head');
 const hover = document.createElement('style');
 hover.innerText = 'a:hover{text-shadow: 1px 2px 2px;}';
 
+// Get link, body, and container
+let linkProp = document.querySelectorAll('a'),
+  body = document.querySelector('body'),
+  container = document.querySelector('.container');
+
 // On
 styleButtonOn.innerText = 'Click for Styles On';
-styleButtonOn.addEventListener('click', function () { head.append(hover) });
+styleButtonOn.addEventListener('click', function () {
+  head.append(hover);
+  linkProp.forEach(curr => curr.style.color = 'blue');
+  body.style.backgroundColor = 'darkgrey';
+  container.style.backgroundColor = 'whitesmoke';
+});
 
 // Off
 const styleButtonOff = document.createElement('button');
 styleButtonOff.innerText = 'Click for Styles Off';
 ctaText.appendChild(styleButtonOff);
-styleButtonOff.addEventListener('click', function () { head.removeChild(hover) });
+styleButtonOff.addEventListener('click', function () {
+  head.removeChild(hover);
+  linkProp.forEach(curr => curr.style.color = 'grey');
+  body.style.backgroundColor = 'white';
+  container.style.backgroundColor = 'white';
+});
